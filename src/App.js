@@ -5,7 +5,12 @@ import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import './App.css'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import fusTheme from './fusTheme';
+
 injectTapEventPlugin()
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +21,7 @@ class App extends Component {
   handleClose = () => this.setState({open: false});
   render() {
     return (
+      <MuiThemeProvider muiTheme ={getMuiTheme(fusTheme)}>
       <div className="App">
        <AppBar
         title="Title"
@@ -32,6 +38,7 @@ class App extends Component {
           <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
         </Drawer>
     </div>
+    </MuiThemeProvider>
     );
   }
 }
