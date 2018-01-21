@@ -8,6 +8,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import fusTheme from './fusTheme';
+import {
+  BrowserRouter,
+  Route,
+  Link
+} from 'react-router-dom';
+
 
 injectTapEventPlugin()
 
@@ -21,6 +27,7 @@ class App extends Component {
   handleClose = () => this.setState({open: false});
   render() {
     return (
+      <BrowserRouter>
       <MuiThemeProvider muiTheme ={getMuiTheme(fusTheme)}>
       <div className="App">
        <AppBar
@@ -34,11 +41,14 @@ class App extends Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-          <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
+          <Link to ="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
+          <Link to ="/about"><MenuItem onClick={this.handleClose}>About</MenuItem></Link>
         </Drawer>
     </div>
-    </MuiThemeProvider>
+    <Route exact path="/" render = { () => <h1> Home view </h1> }/>
+    <Route exact path="/about" render = { () => <h1> About view </h1> }/>
+    </MuiThemeProvider>     
+    </BrowserRouter>
     );
   }
 }
